@@ -1,0 +1,23 @@
+name: 手動実行してみる
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "タグを選ぶ"
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show selected tag
+        run: echo "選ばれたのは ${{ github.event.inputs.tag }}　でした"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag }}
+
+      - name: Show output.txt contents
+        run: cat output.txt
