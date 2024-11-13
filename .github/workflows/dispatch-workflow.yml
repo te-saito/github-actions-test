@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  deploy:
+  test-job:
     runs-on: ubuntu-latest
     steps:
       - name: Show selected tag
