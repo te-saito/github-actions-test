@@ -8,15 +8,24 @@ on:
         required: true
 
 jobs:
+  show-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code with all tags
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0  # これによりすべてのタグと履歴が取得されます
+
+      - name: Fetch and show all tags
+        run: |
+            git fetch --tags
+            echo "利用可能なタグ一覧:"
+            git tag -l
+
+
   test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch tags
-        run: |
-          git fetch --tags
-          echo "使用可能なタグ:"
-          git tag -l
-
       - name: Show selected tag
         run: echo "選ばれたのは ${{ github.event.inputs.tag }} でした"
 
