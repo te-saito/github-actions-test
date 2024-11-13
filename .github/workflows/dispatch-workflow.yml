@@ -8,11 +8,17 @@ on:
         required: true
 
 jobs:
-  test-job-v3:
+  test-job:
     runs-on: ubuntu-latest
     steps:
+      - name: Fetch tags
+        run: |
+          git fetch --tags
+          echo "使用可能なタグ:"
+          git tag -l
+
       - name: Show selected tag
-        run: echo "選ばれたのは ${{ github.event.inputs.tag }}　でした"
+        run: echo "選ばれたのは ${{ github.event.inputs.tag }} でした"
 
       - name: Checkout code
         uses: actions/checkout@v4
